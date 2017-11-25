@@ -62,7 +62,7 @@ MonoBehaviour:
     autoInitTracker: 1
     autoStartTracker: 1
     autoInitBuilder: 1
-    sceneUnitsToMillimeter: 10
+    sceneUnitsToMillimeter: 1000
   deviceTracker:
     autoInitTracker: 0
     autoStartTracker: 0
