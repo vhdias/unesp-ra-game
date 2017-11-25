@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="stones" size="0.210000 0.147000" />
+    <ImageTarget name="weapon" size="0.210000 0.210000" />
+    <ImageTarget name="wall4" size="0.210000 0.210000" />
+    <ImageTarget name="wall3" size="0.210000 0.210000" />
+    <ImageTarget name="wall2" size="0.210000 0.210000" />
+    <ImageTarget name="wall1" size="0.210000 0.210000" />
+    <ImageTarget name="table" size="0.210000 0.210000" />
+    <ImageTarget name="menu" size="0.210000 0.210000" />
+    <ImageTarget name="ground" size="0.210000 0.210000" />
+    <ImageTarget name="floor" size="0.210000 0.210000" />
+  </Tracking>
+</QCARConfig>
