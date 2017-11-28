@@ -17,13 +17,16 @@ public class VirtualButtonController : MonoBehaviour, IVirtualButtonEventHandler
             vbs[i].RegisterEventHandler(this);
         }
 
-        Cubo = transform.Find("Cube").gameObject;
+        Cubo = transform.Find("Quad").Find("Cube").gameObject;
 	}
 
     void IVirtualButtonEventHandler.OnButtonPressed(VirtualButtonAbstractBehaviour vb)
     {
         switch (vb.VirtualButtonName)
         {
+            case "Ativa":
+                Cubo.SetActive(true);
+                break;
             case "Troca cor":
                 Renderer renderer = Cubo.GetComponent<Renderer>();
                 renderer.material.SetColor("_Color", Color.blue);
@@ -34,6 +37,9 @@ public class VirtualButtonController : MonoBehaviour, IVirtualButtonEventHandler
     {
         switch (vb.VirtualButtonName)
         {
+            case "Ativa":
+                Cubo.SetActive(false);
+                break;
             case "Troca cor":
                 Renderer renderer = Cubo.GetComponent<Renderer>();
                 renderer.material.SetColor("_Color", Color.red);

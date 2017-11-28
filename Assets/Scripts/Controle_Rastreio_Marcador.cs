@@ -87,7 +87,7 @@ namespace Vuforia
             // Habilita objetos
             for(int i = 0; i < transform.childCount; i++)
             {
-                transform.GetChild(i).gameObject.SetActive(true);
+                if (!transform.GetChild(i).CompareTag("ActiveByButton")) transform.GetChild(i).gameObject.SetActive(true);
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
@@ -102,7 +102,8 @@ namespace Vuforia
             // Desabilita objetos
             for (int i = 0; i < transform.childCount; i++)
             {
-                transform.GetChild(i).gameObject.SetActive(false);
+                var go = transform.GetChild(i).gameObject;
+                if(!go.CompareTag("VirtualButton")) go.SetActive(false);
             }
 
             // Disable rendering:
