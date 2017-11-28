@@ -3,21 +3,14 @@ using UnityEngine;
 
 public class Atingiu_Alvo : MonoBehaviour {
 
-    public static int pontos = 0;
-
-	// Use this for initialization
-	void Start () {
-        pontos = 0;
-	}
-
     void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.name == "Bola(Clone)")
+        if(col.gameObject.name == "Sphere(Clone)")
         {
-            pontos = pontos + 1;
-
-            Destroy (this.gameObject, 0.03f);
-            Destroy(col.gameObject, 0.05f);
+            Renderer renderer = col.gameObject.GetComponent<Renderer>();
+            renderer.material.SetColor("_Color", Color.red);
+            //Destroy(col.gameObject, 0.01f);
+            Debug.Log("BATEU!!!!!");
         }
     }
 

@@ -5,6 +5,7 @@ using Vuforia;
 
 
 public class VirtualButtonController : MonoBehaviour, IVirtualButtonEventHandler {
+    public Rigidbody bullet;
     // Use this for initialization
 	void Start () {
         // Gera uma lista dos filhos que são botões virtuais
@@ -33,7 +34,10 @@ public class VirtualButtonController : MonoBehaviour, IVirtualButtonEventHandler
                 renderer.material.SetColor("_Color", Color.blue);
                 break;
             case "Dispara":
-
+                Rigidbody instance = (Rigidbody)Instantiate(bullet, transform.position, transform.rotation);
+                Vector3 forward = Quaternion.Euler(90, 0, 0) * transform.TransformDirection(Vector3.forward);
+                instance.AddForce(forward * 15);
+                //Destroy(instance.gameObject, 12.5f);
                 break;
         }
     }
@@ -49,7 +53,7 @@ public class VirtualButtonController : MonoBehaviour, IVirtualButtonEventHandler
                 renderer.material.SetColor("_Color", Color.red);
                 break;
             case "Dispara":
-
+                //Nothing
                 break;
         }//Ativa "Botão" (GameObject) filho do container do botão virtual
         transform.Find(vb.transform.gameObject.name).Find("Botao").gameObject.SetActive(true);
