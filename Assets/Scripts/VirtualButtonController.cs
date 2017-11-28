@@ -5,7 +5,6 @@ using Vuforia;
 
 
 public class VirtualButtonController : MonoBehaviour, IVirtualButtonEventHandler {
-    private GameObject Cubo;
     // Use this for initialization
 	void Start () {
         // Gera uma lista dos filhos que são botões virtuais
@@ -16,20 +15,25 @@ public class VirtualButtonController : MonoBehaviour, IVirtualButtonEventHandler
             //Registra os botões para que eventos possam ser acionados
             vbs[i].RegisterEventHandler(this);
         }
-
-        Cubo = transform.Find("Quad").Find("Cube").gameObject;
 	}
 
     void IVirtualButtonEventHandler.OnButtonPressed(VirtualButtonAbstractBehaviour vb)
     {
+        Renderer renderer;
+        //Desativa "Botão" (GameObject) filho do container do botão virtual
+        transform.Find(vb.transform.gameObject.name).Find("Botao").gameObject.SetActive(false);
         switch (vb.VirtualButtonName)
         {
+            
             case "Ativa":
-                Cubo.SetActive(true);
+                transform.Find("Quad").Find("Cube").gameObject.SetActive(true);
                 break;
             case "Troca cor":
-                Renderer renderer = Cubo.GetComponent<Renderer>();
+                renderer = transform.Find("Quad").Find("Cube").gameObject.GetComponent<Renderer>();
                 renderer.material.SetColor("_Color", Color.blue);
+                break;
+            case "Dispara":
+
                 break;
         }
     }
@@ -38,16 +42,20 @@ public class VirtualButtonController : MonoBehaviour, IVirtualButtonEventHandler
         switch (vb.VirtualButtonName)
         {
             case "Ativa":
-                Cubo.SetActive(false);
+                transform.Find("Quad").Find("Cube").gameObject.SetActive(false);
                 break;
             case "Troca cor":
-                Renderer renderer = Cubo.GetComponent<Renderer>();
+                Renderer renderer = transform.Find("Quad").Find("Cube").gameObject.GetComponent<Renderer>();
                 renderer.material.SetColor("_Color", Color.red);
                 break;
-        }
+            case "Dispara":
+
+                break;
+        }//Ativa "Botão" (GameObject) filho do container do botão virtual
+        transform.Find(vb.transform.gameObject.name).Find("Botao").gameObject.SetActive(true);
     }
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }
