@@ -35,7 +35,8 @@ public class VirtualButtonController : MonoBehaviour, IVirtualButtonEventHandler
                 break;
             case "Dispara":
                 Rigidbody instance = (Rigidbody)Instantiate(bullet, transform.position, transform.rotation);
-                Vector3 forward = Quaternion.Euler(90, 0, 0) * transform.TransformDirection(Vector3.forward);
+                Vector3 forward = transform.TransformDirection(new Vector3(0,-1,0));
+                
                 instance.AddForce(forward * 15);
                 //Destroy(instance.gameObject, 12.5f);
                 break;
