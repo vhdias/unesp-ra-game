@@ -102,14 +102,12 @@ namespace Vuforia
             // Desabilita objetos
             for (int i = 0; i < transform.childCount; i++)
             {
-                var go = transform.GetChild(i).gameObject;
-                if(!go.CompareTag("VirtualButton")) go.SetActive(false);
+                if(!transform.GetChild(i).gameObject.CompareTag("VirtualButton")) transform.GetChild(i).gameObject.SetActive(false);
             }
 
             // Disable rendering:
             foreach (Renderer component in rendererComponents)
-            {
-                //component.gameObject.SetActive(false);
+            { 
                 component.enabled = false;
             }
 
