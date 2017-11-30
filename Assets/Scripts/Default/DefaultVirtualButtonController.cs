@@ -20,18 +20,15 @@ public class DefaultVirtualButtonController : MonoBehaviour, IVirtualButtonEvent
     void IVirtualButtonEventHandler.OnButtonPressed(VirtualButtonAbstractBehaviour vb)
     {
         //Desativa "Botão" (GameObject) filho do container do botão virtual se ele for o primeiro filho
-        Transform button = vb.transform; 
-        if (button.childCount > 0) button = button.GetChild(0);
-        if (button.name == "Botao") gameObject.SetActive(false);
+        //Transform button = transform.Find(vb.transform.gameObject.name).transform;
+        transform.Find(vb.transform.gameObject.name).Find("Botao").gameObject.SetActive(false);
         ButtonPressed();
     }
     void IVirtualButtonEventHandler.OnButtonReleased(VirtualButtonAbstractBehaviour vb)
     {
         ButtonReleased();
         //Ativa "Botão" (GameObject) filho do container do botão virtual se ele for o primeiro filho
-        Transform button = vb.transform;
-        if (button.childCount > 0) button = button.GetChild(0);
-        if (button.name == "Botao") gameObject.SetActive(true);
+        transform.Find(vb.transform.gameObject.name).Find("Botao").gameObject.SetActive(true);
     }
 
     virtual protected void ButtonPressed() { }
