@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using Vuforia;
 
-public class TrackableEventHandler : DefaultTrackableEventHandler
+public class TrackableEventHandler : DefaultTrackableEventHandler,
+                                    ITrackableEventHandler
 {
-    private void OnTrackingFound()
+    override protected void OnTrackingFound()
     {
         Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
         Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
@@ -30,7 +31,7 @@ public class TrackableEventHandler : DefaultTrackableEventHandler
     }
 
 
-    private void OnTrackingLost()
+    override protected void OnTrackingLost()
     {
         Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
         Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
