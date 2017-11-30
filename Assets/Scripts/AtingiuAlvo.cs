@@ -3,15 +3,13 @@ using UnityEngine;
 
 public class AtingiuAlvo : MonoBehaviour {
     public float timeToDestroy = 0;
-    public Color colorBeforeDestroy = Color.red;
-
+    
     void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.name == "Sphere(Clone)")
+        if(col.gameObject.name == "EsferaParticulas")
         {
-            Renderer renderer = col.gameObject.GetComponent<Renderer>();
-            renderer.material.SetColor("_Color", colorBeforeDestroy);
-            if(timeToDestroy != 0) Destroy(col.gameObject, timeToDestroy);
+            Destroy(gameObject, timeToDestroy);
+            Debug.Log("Colisão com a explosão");
         }
     }
 }
