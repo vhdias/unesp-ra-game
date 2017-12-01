@@ -25,19 +25,12 @@ public class WeaponController : DefaultVirtualButtonController
         {
             //Busca objeto que centralizara a saida dos raios na ponta da arma
             Transform centralize = transform.Find("Ray");
-            //Cria o raio
+            //Cria a esfera de raios
             GameObject shooted = Instantiate(ray, centralize.position, centralize.rotation);
-            //Desabilita esfera em volta do ponto de atração
-            var particles = shooted.GetComponentsInChildren<ParticleSystem>();
-            for(int i = 1; i < particles.Length; i++)
-            {
-                var emissor = particles[i].emission;
-                emissor.SetBursts(null, 0);
-            }
             //Obtem o rigidbody que representa o ponto de atração das particulas
-            Rigidbody target = shooted.GetComponentInChildren<Rigidbody>();
+            Rigidbody target = shooted.GetComponent<Rigidbody>();
             //Movimenta o ponto de atração
-            target.AddRelativeForce(new Vector3(0, -1, 0) * speed * 30);
+            target.AddRelativeForce(new Vector3(0, -1, 0));
             ParticleSystem particleSystem = shooted.GetComponent<ParticleSystem>();
             Destroy(shooted, particleSystem.main.duration);
         }
