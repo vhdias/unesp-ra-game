@@ -6,7 +6,7 @@ public class AtingiuAlvo : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.name == "Grenade(Clone)")
+        if (col.gameObject.name == "EsferaParticulas")
         {
             Destroy(gameObject, timeToDestroy);
             //Debug.Log("Colisão com a explosão");
