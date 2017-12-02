@@ -15,21 +15,17 @@ public class WeaponController : DefaultVirtualButtonController
     }
     public Weapons weapon = Weapons.Grenade;
 
-    private bool iniatilized = false;
+    private bool iniatilized = false, changedWeapon = false;
    
     override protected void ButtonPressed()
     {
-        //"TrocaArma()" será removido daqui e movido para Update() quando for implementada a troca por rotação. 
-        //Por hora só pode ser testado efetuando a troca manualmente no editor da Unity da arma selecionada (variável weapon)
         if (weapon == Weapons.Grenade)
         {
-            TrocaArma();//Será removido daqui e movido para Update() quando for implementada a troca por rotação
             Rigidbody shooted = ActionRA.Atira(new Vector3(0, 1, 0), transform.Find("Grenade"), bullet, speed, timeToDestroy);
             shooted.AddRelativeTorque(Random.rotation * new Vector3(1, 1, 1));
         }
         else if (weapon == Weapons.Ray)
         {
-            TrocaArma(); //Será removido daqui e movido para Update() quando for implementada a troca por rotação
             //Busca objeto que centralizara a saida dos raios na ponta da arma
             Transform centralize = transform.Find("Ray");
             //Cria a esfera de raios
@@ -48,6 +44,7 @@ public class WeaponController : DefaultVirtualButtonController
     /// </summary>
     void TrocaArma()
     {
+
         if (iniatilized == false)
         {
             //Debug.Log("Grenade: " + (int)Weapons.Grenade + "\n Ray: " + (int)Weapons.Ray + "\n Weapons" + weapons.Length);
@@ -55,6 +52,7 @@ public class WeaponController : DefaultVirtualButtonController
             weapons[(int)Weapons.Ray] = transform.Find("Ray Launcher").gameObject;
             iniatilized = true;
         }
+        weapon = (Weapons) (((int)weapon + 1) % 2);
         var _weapon = weapons[(int)Weapons.Grenade];
         var _weaponIsSelected = weapon == Weapons.Grenade;
         _weapon.SetActive(_weaponIsSelected);
@@ -67,6 +65,15 @@ public class WeaponController : DefaultVirtualButtonController
 
     private void Update()
     {
-
+        // 10 graus = PI/18
+        if (Mathf.Abs(transform.eulerAngles.x) < 90)
+        { 
+            if (!changedWeapon)
+            {
+                TrocaArma();
+                changedWeapon = true;
+            }
+        }
+        else changedWeapon = false;
     }
 }
