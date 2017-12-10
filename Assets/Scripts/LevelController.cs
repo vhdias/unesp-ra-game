@@ -10,7 +10,7 @@ public class LevelController : MonoBehaviour {
     public Text Information, Points;
     private int points = 0;
     private int[] oldCounts;
-    bool alreadyIntroductionDone = false, finished = false;
+    bool alreadyIntroductionDone = false;
 
     Transform Alvos(int i, bool state)
     {
@@ -102,11 +102,9 @@ public class LevelController : MonoBehaviour {
                 oldCounts[i] = alvos[i].childCount;
             }
             if (alvos[0].childCount == 0 && alvos[1].childCount == 0)
-                if (!NextLevel() && !finished)
+                if (!NextLevel())
                 {
-                    StartCoroutine(Wining());
-                    finished = true;
-                    //Debug.Log("Acabou o jogo!");
+                    SetText("Parabéns, você venceu!");
                 }
         }
     }
