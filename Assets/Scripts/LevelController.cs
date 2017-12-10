@@ -10,7 +10,7 @@ public class LevelController : MonoBehaviour {
     public Text Information, Points;
     private int points = 0;
     private int[] oldCounts;
-    bool alreadyIntroductionDone = false;
+    bool alreadyIntroductionDone = false, finished = false;
 
     Transform Alvos(int i, bool state)
     {
@@ -31,6 +31,18 @@ public class LevelController : MonoBehaviour {
 
     IEnumerator Introduction()
     {
+        /*
+        string texto = "Seja bem vindo" +
+                        "Obstrua o botão vermelho para atirar" +
+                        "Rotacione a arma em 180º para trocar de arma" +
+                        "Boa sorte...";
+        var words = texto.Split(' ');
+        foreach(string s in words)
+        {
+            SetText(s);
+            yield return new WaitForSecondsRealtime(0.3f);
+        }
+        */
         SetText("Seja bem vindo");
         yield return new WaitForSecondsRealtime(3);
         SetText("Obstrua o botão vermelho para atirar");
@@ -50,6 +62,15 @@ public class LevelController : MonoBehaviour {
         }
     }
 
+    IEnumerator Wining()
+    {
+        SetText("Parabéns, você venceu!");
+        yield return new WaitForSecondsRealtime(3);
+        SetText("Adeus.");
+        yield return new WaitForSecondsRealtime(3);
+        SetText("");
+    }
+
     private bool NextLevel()
     {
         if (actual == lastLevel)
@@ -64,6 +85,7 @@ public class LevelController : MonoBehaviour {
         {
             Alvos(actual * 2 - i - 1,false);
             alvos[i] = Alvos((actual + 1) * 2 - i - 1,true);
+            oldCounts[i] = alvos[i].childCount;
         }
         actual++;
         return true; //Foi para o próximo level
@@ -75,16 +97,15 @@ public class LevelController : MonoBehaviour {
         {
             for (int i = 0; i < 2; i++)
             {
-                points += (alvos[i].childCount - oldCounts[i]) * actual;
+                points += (oldCounts[i] - alvos[i].childCount) * actual;
                 SetText(points);
                 oldCounts[i] = alvos[i].childCount;
             }
             if (alvos[0].childCount == 0 && alvos[1].childCount == 0)
-                if (!NextLevel())
+                if (!NextLevel() && !finished)
                 {
-                    SetText("Parabéns, você venceu!" +
-                            "Adeus.");
-                    Points.text = "";
+                    StartCoroutine(Wining());
+                    finished = true;
                     //Debug.Log("Acabou o jogo!");
                 }
         }
@@ -97,6 +118,6 @@ public class LevelController : MonoBehaviour {
 
     private void SetText(string text)
     {
-        Information.text = text;
+        Points.text = text;
     }
 }

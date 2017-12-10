@@ -12,7 +12,7 @@ public class Explode : MonoBehaviour {
         //Instancia uma esfera para verificar colisões de forma otimizada
         GameObject spheretoCollid = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         //Define o raio da esfera como o mesmo do sistema de particula multiplicado por uma escala determinada pelo tamanho sprite
-        float raio = generatedparticleSystem.shape.radius * 2.4f;
+        float raio = generatedparticleSystem.shape.radius;
         spheretoCollid.transform.localScale = new Vector3(raio, raio, raio);
         spheretoCollid.transform.position = transform.position;
         Rigidbody rig = spheretoCollid.AddComponent<Rigidbody>();
