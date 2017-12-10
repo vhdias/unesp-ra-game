@@ -24,7 +24,8 @@ public class AtingiuAlvo : MonoBehaviour {
         } else if(col.gameObject.name == "Chao")
         {
             ActivateRigidbodyGravity();
-            Destroy(gameObject, timeToDestroy * scale * 3);
+            //Destroy(gameObject, timeToDestroy * scale * 3);
+            Destroy(gameObject);
         }
     }
 
