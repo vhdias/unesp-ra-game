@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class AtingiuAlvo : MonoBehaviour {
     public float timeToDestroy = 1 , scale = 1.5f;
+    public Transform tracker;
+
+    private void Update()
+    {
+        var VectorDistance = (transform.position - tracker.position);
+        var Distance = Mathf.Pow(VectorDistance.x, 2) + Mathf.Pow(VectorDistance.y, 2) + Mathf.Pow(VectorDistance.z, 2);
+        if (Mathf.Sqrt(Distance) > 30) Destroy(gameObject);
+    }
 
     void OnCollisionEnter(Collision col)
     {
@@ -24,7 +32,8 @@ public class AtingiuAlvo : MonoBehaviour {
         } else if(col.gameObject.name == "Chao")
         {
             ActivateRigidbodyGravity();
-            Destroy(gameObject, timeToDestroy * scale * 3);
+            //Destroy(gameObject, timeToDestroy * scale * 3);
+            Destroy(gameObject);
         }
     }
 
